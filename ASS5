@@ -1,133 +1,392 @@
-//KC03O8EA JOB ,'SAM PIECZ',MSGCLASS=H                                  00010014
-//STEP1 EXEC PGM=ASSIST                                                 00020014
-//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030014
-//SYSPRINT DD SYSOUT=*                                                  00040014
-//SYSIN DD *                                                            00050014
-***************************************************                     00060014
-* ASSIGNMENT FIVE                                                       00070014
-*                                                                       00080014
-* NAME: SAMUEL PIECZ                                                    00090014
-*                                                                       00100014
-* REGISTER USAGE                                                        00110014
-*                                                                       00120014
-* 1                                                                     00130014
-* 2                                                                     00140014
-* 3                                                                     00150014
-* 4                                                                     00160014
-* 5                                                                     00170014
-* 6                                                                     00180014
-* 7                                                                     00190014
-* 8                                                                     00200014
-* 9                                                                     00210014
-* 10                                                                    00220014
-* 11                                                                    00230014
-* 12                                                                    00240014
-* 13                                                                    00250014
-* 14                                                                    00260014
-*                                                                       00270014
-***************************************************                     00280014
-MAIN     CSECT                                                          00290014
-*                                                                       00300019
-***< ENTRY LINKAGE>                                                     00300119
-*                                                                       00300219
-         STM   14,12,12(13)                                             00301015
-         LR    12,15                                                    00310017
-         USING MAIN,12                                                  00320015
-         LA    14,MAINSAVE                                              00321015
-         ST    14,8(0,13)                                               00322015
-         ST    13,4(0,14)                                               00323015
-         LR    13,14                                                    00324015
-* CODE THAT DOES STUFF                                                  00325019
-         LA    1,PARMS                                                  00350014
-         L     15,=V(BUILD)                                             00400014
-         BALR  14,15                                                    00450014
-*                                                                       00451123
-***< GET 3 LINES OF NUMS>                                               00451223
-*                                                                       00451323
-         XDECI 8,BUFFER                                                 00451626
-         C     8,=F'-1010101'                                           00451727
-         BC    B'1000',BOTTOM                                           00451823
-BOTTOM   XREAD BUFFER,80                                                00451923
-         XDECI 2,BUFFER                                                 00452023
-         XDECO 2,D1                                                     00452129
-         XDECI 3,0(1)                                                   00452223
-         XDECO 3,H1                                                     00452329
-         XREAD BUFFER,80                                                00452429
-         XDECI 4,BUFFER                                                 00452529
-         XDECO 4,D2                                                     00452629
-         XDECI 5,0(1)                                                   00452723
-         XDECO 5,H2                                                     00452829
-         XREAD BUFFER,80                                                00452929
-         XDECI 6,BUFFER                                                 00453029
-         XDECO 6,D3                                                     00453129
-         XDECI 7,0(1)                                                   00453223
-         XDECO 7,H3                                                     00453329
-         XPRNT TOC,15                                                   00453430
-*                                                                       00453530
-***< START PRINT SUBROUTINE>                                            00453630
-*                                                                       00453730
-         LA    1,PPARMS                                                 00453830
-         L     15,=V(PRINT)                                             00453930
-         BALR  14,15                                                    00454030
-*                                                                       00454119
-***< EXIT LINKAGE>                                                      00454219
-*                                                                       00455019
-         L     13,4(0,13)                                               00491018
-         LM    14,12,12(13)                                             00492018
-         BR    14                                                       00493018
-         LTORG                                                          00500014
-TOC      DC    C' '                                                     00510030
-         DC    CL14'TABLE CONTENTS'                                     00511030
-D1       DS    F                                                        00520030
-H1       DS    F                                                        00530030
-D2       DS    F                                                        00540030
-H2       DS    F                                                        00541030
-D3       DS    F                                                        00542030
-H3       DS    F                                                        00543030
-MAINSAVE DS    18F                                                      00550014
-TABLE    DC    80F'-64'                                                 00600014
-EOT      DS    F                                                        00610014
-BUFFER   DS    80C                                                      00611016
-         DC    C'*'                                                     00612015
-PARMS    DC    A(TABLE)                                                 00620014
-         DC    A(EOT)                                                   00630014
-         DC    A(BUFFER)                                                00631015
-****************************************************                    00690014
-* START BUILD SUBROUTINE - AN EXTERNAL SUBROUTINE                       00700014
-****************************************************                    00710014
-BUILD    CSECT                                                          00720014
-*                                                                       00721019
-***< ENTRY LINKAGE>                                                     00722019
-*                                                                       00723019
-         STM   14,12,12(13)                                             00730014
-         LR    12,15                                                    00740014
-         USING BUILD,12                                                 00750014
-         LA    14,BSAVE                                                 00760014
-         ST    13,4(0,14)                                               00770014
-         ST    14,8(0,13)                                               00780014
-         LR    13,14                                                    00790014
-* NOW CODE THAT ACTUALLY DOES STUFF                                     00810014
-         LM    2,4,0(1)                                                 00860015
-LOOP1    XREAD 0(4),80   BEGIN READ                                     00960015
-         BC    B'0100',ENDL1                                            01010020
-         LA    1,0(4)                                                   01020020
-LOOP2    XDECI 6,0(1)                                                   01060020
-         BC    B'0001',LOOP1                                            01061022
-         C     6,=F'-1010101'                                           01062027
-         BC    B'1000',ENDL1                                            01063022
-         ST    6,0(2)   STORE IN TABLE                                  01070021
-         LA    2,4(0,2) INCREMENT POINTER                               01080021
-         BC    B'1111',LOOP2                                            01084022
-ENDL1    ST    2,0(0,3)                                                 01085021
-*                                                                       01086015
-***< EXIT LINKAGE >                                                     01170014
-*                                                                       01180014
-         L     13,4(0,13)                                               01190014
-         LM    14,12,12(13)                                             01200014
-         BR    14                                                       01210014
-         LTORG                                                          01260014
-BSAVE    DS    18F                                                      01330014
-         END   MAIN                                                     01370014
-/*                                                                      01380014
-//FT05F001  DD  DSN=KC02314.AUTUMN18.CSCI360.HW5DATA,DISP=SHR           01390014
-//                                                                      01400014
+//KC03O8EA JOB ,'SAM PIECZ',MSGCLASS=H
+//STEP1 EXEC PGM=ASSIST
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+***************************************************
+* ASSIGNMENT FIVE
+*
+* NAME: SAMUEL PIECZ
+*
+* REGISTER USAGE
+*
+* 1
+* 2
+* 3
+* 4
+* 5
+* 6
+* 7
+* 8
+* 9
+* 10
+* 11
+* 12
+* 13
+* 14
+*
+***************************************************
+MAIN     CSECT
+*
+***< ENTRY LINKAGE>
+*
+         STM   14,12,12(13)
+         LR    12,15
+         USING MAIN,12
+         LA    14,MAINSAVE
+         ST    14,8(0,13)
+         ST    13,4(0,14)
+         LR    13,14
+*
+***< CALL BUILD SUBROUTINE AND PASS IN PARMS>
+*
+         LA    1,PARMS
+         L     15,=V(BUILD)
+         BALR  14,15
+*
+***< READ IN D1-D3 & H1-H3>
+*
+         XDECI 8,BUFFER
+         C     8,=F'-1010101'
+         BC    B'1000',BOTTOM
+BOTTOM   XREAD BUFFER,80
+         XDECI 2,BUFFER
+         XDECO 2,D1
+         XDECI 3,0(1)
+         XDECO 3,H1
+         XREAD BUFFER,80
+         XDECI 4,BUFFER
+         XDECO 4,D2
+         XDECI 5,0(1)
+         XDECO 5,H2
+         XREAD BUFFER,80
+         XDECI 6,BUFFER
+         XDECO 6,D3
+         XDECI 7,0(1)
+         XDECO 7,H3
+         XPRNT TOC,15
+*
+***< START PRINT SUBROUTINE>
+*
+         LA    1,PPARMS
+         L     15,=V(PRINT)
+         BALR  14,15
+*
+***< PRINT D1-D3 & H1-H3 AND MULTIPLES>
+*
+         XPRINT SET1,17
+         XPRINT SET2,17
+         XPRINT SET3,17
+***< EXIT LINKAGE>
+*
+         L     13,4(0,13)
+         LM    14,12,12(13)
+         BR    14
+*
+***< MAIN LTORGS>
+*
+         LTORG
+*
+***< FOR MULTIPLES>
+*
+SET1     DC    C' '
+         DC    CL12'Multiples of'
+D1       DS    F
+SET2     DC    C' '
+         DC    CL12'Multiples of'
+D2       DS    F
+SET3     DC    C' '
+         DC    CL12'Multiples of'
+D3       DS    F
+*
+***< FOR TABLE OF CONTENTS>
+*
+TOC      DC    C' '
+         DC    CL14'TABLE CONTENTS'
+H1       DS    F
+H2       DS    F
+H3       DS    F
+*
+***< PARAMETER LISTS ONE FOR BUILD ONE FOR PRINT>
+*
+TABLE    DC    80F'-64'
+EOT      DS    F
+BUFFER   DS    80C
+         DC    C'*'
+PARMS    DC    A(TABLE)
+         DC    A(EOT)
+         DC    A(BUFFER)
+PPARMS   DC    A(TABLE)
+         DC    A(EOT)
+         DC    A(BUFFER)
+*
+***< RESTORE REGISTERS >
+*
+MAINSAVE DS    18F
+***************************************************
+*
+* BUILD SUBROUTINE
+*
+***************************************************
+BUILD    CSECT
+*
+***< ENTRY LINKAGE>
+*
+         STM   14,12,12(13)
+         LR    12,15
+         USING BUILD,12
+         LA    14,BSAVE
+         ST    13,4(0,14)
+         ST    14,8(0,13)
+         LR    13,14
+*
+***< START LOGIC>
+*
+         LM    2,4,0(1)
+LOOP1    XREAD 0(4),80   BEGIN READ
+         BC    B'0100',ENDL1
+         LA    1,0(4)
+LOOP2    XDECI 6,0(1)
+         BC    B'0001',LOOP1
+         C     6,=F'-1010101'
+         BC    B'1000',ENDL1
+         ST    6,0(2)   STORE IN TABLE
+         LA    2,4(0,2) INCREMENT POINTER
+         BC    B'1111',LOOP2
+ENDL1    ST    2,0(0,3)
+*
+***< EXIT LINKAGE >
+*
+         L     13,4(0,13)
+         LM    14,12,12(13)
+         BR    14
+         LTORG
+BSAVE    DS    18F
+***************************************************
+*
+* PRINT SUBROUTINE
+*
+***************************************************
+PRINT    CSECT
+*
+***< ENTRY LINKAGE>
+*
+         STM   14,12,12(13)
+         LR    12,15
+         USING PRINT,12
+         LA    14,BSAVE
+         ST    13,4(0,14)
+         ST    14,8(0,13)
+         LR    13,14
+*
+***< START LOGIC>
+*
+         LM    2,5,0(1)
+*
+***< EXIT LINKAGE >
+*
+         L     13,4(0,13)
+         LM    14,12,12(13)
+         BR    14
+         LTORG
+PSAVE    DS    18F
+         END   MAIN
+/*
+//FT05F001  DD  DSN=KC02314.AUTUMN18.CSCI360.HW5DATA,DISP=SHR
+//
+//KC03O8EA JOB ,'SAM PIECZ',MSGCLASS=H
+//STEP1 EXEC PGM=ASSIST
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+***************************************************
+* ASSIGNMENT FIVE
+*
+* NAME: SAMUEL PIECZ
+*
+* REGISTER USAGE
+*
+* 1
+* 2
+* 3
+* 4
+* 5
+* 6
+* 7
+* 8
+* 9
+* 10
+* 11
+* 12
+* 13
+* 14
+*
+***************************************************
+MAIN     CSECT
+*
+***< ENTRY LINKAGE>
+*
+         STM   14,12,12(13)
+         LR    12,15
+         USING MAIN,12
+         LA    14,MAINSAVE
+         ST    14,8(0,13)
+         ST    13,4(0,14)
+         LR    13,14
+*
+***< CALL BUILD SUBROUTINE AND PASS IN PARMS>
+*
+         LA    1,PARMS
+         L     15,=V(BUILD)
+         BALR  14,15
+*
+***< READ IN D1-D3 & H1-H3>
+*
+         XDECI 8,BUFFER
+         C     8,=F'-1010101'
+         BC    B'1000',BOTTOM
+BOTTOM   XREAD BUFFER,80
+         XDECI 2,BUFFER
+         XDECO 2,D1
+         XDECI 3,0(1)
+         XDECO 3,H1
+         XREAD BUFFER,80
+         XDECI 4,BUFFER
+         XDECO 4,D2
+         XDECI 5,0(1)
+         XDECO 5,H2
+         XREAD BUFFER,80
+         XDECI 6,BUFFER
+         XDECO 6,D3
+         XDECI 7,0(1)
+         XDECO 7,H3
+         XPRNT TOC,15
+*
+***< START PRINT SUBROUTINE>
+*
+         LA    1,PPARMS
+         L     15,=V(PRINT)
+         BALR  14,15
+*
+***< PRINT D1-D3 & H1-H3 AND MULTIPLES>
+*
+         XPRINT SET1,17
+         XPRINT SET2,17
+         XPRINT SET3,17
+***< EXIT LINKAGE>
+*
+         L     13,4(0,13)
+         LM    14,12,12(13)
+         BR    14
+*
+***< MAIN LTORGS>
+*
+         LTORG
+*
+***< FOR MULTIPLES>
+*
+SET1     DC    C' '
+         DC    CL12'Multiples of'
+D1       DS    F
+SET2     DC    C' '
+         DC    CL12'Multiples of'
+D2       DS    F
+SET3     DC    C' '
+         DC    CL12'Multiples of'
+D3       DS    F
+*
+***< FOR TABLE OF CONTENTS>
+*
+TOC      DC    C' '
+         DC    CL14'TABLE CONTENTS'
+H1       DS    F
+H2       DS    F
+H3       DS    F
+*
+***< PARAMETER LISTS ONE FOR BUILD ONE FOR PRINT>
+*
+TABLE    DC    80F'-64'
+EOT      DS    F
+BUFFER   DS    80C
+         DC    C'*'
+PARMS    DC    A(TABLE)
+         DC    A(EOT)
+         DC    A(BUFFER)
+PPARMS   DC    A(TABLE)
+         DC    A(EOT)
+         DC    A(BUFFER)
+*
+***< RESTORE REGISTERS >
+*
+MAINSAVE DS    18F
+***************************************************
+*
+* BUILD SUBROUTINE
+*
+***************************************************
+BUILD    CSECT
+*
+***< ENTRY LINKAGE>
+*
+         STM   14,12,12(13)
+         LR    12,15
+         USING BUILD,12
+         LA    14,BSAVE
+         ST    13,4(0,14)
+         ST    14,8(0,13)
+         LR    13,14
+*
+***< START LOGIC>
+*
+         LM    2,4,0(1)
+LOOP1    XREAD 0(4),80   BEGIN READ
+         BC    B'0100',ENDL1
+         LA    1,0(4)
+LOOP2    XDECI 6,0(1)
+         BC    B'0001',LOOP1
+         C     6,=F'-1010101'
+         BC    B'1000',ENDL1
+         ST    6,0(2)   STORE IN TABLE
+         LA    2,4(0,2) INCREMENT POINTER
+         BC    B'1111',LOOP2
+ENDL1    ST    2,0(0,3)
+*
+***< EXIT LINKAGE >
+*
+         L     13,4(0,13)
+         LM    14,12,12(13)
+         BR    14
+         LTORG
+BSAVE    DS    18F
+***************************************************
+*
+* PRINT SUBROUTINE
+*
+***************************************************
+PRINT    CSECT
+*
+***< ENTRY LINKAGE>
+*
+         STM   14,12,12(13)
+         LR    12,15
+         USING PRINT,12
+         LA    14,BSAVE
+         ST    13,4(0,14)
+         ST    14,8(0,13)
+         LR    13,14
+*
+***< START LOGIC>
+*
+         LM    2,5,0(1)
+*
+***< EXIT LINKAGE >
+*
+         L     13,4(0,13)
+         LM    14,12,12(13)
+         BR    14
+         LTORG
+PSAVE    DS    18F
+         END   MAIN
+/*
+//FT05F001  DD  DSN=KC02314.AUTUMN18.CSCI360.HW5DATA,DISP=SHR
+//
