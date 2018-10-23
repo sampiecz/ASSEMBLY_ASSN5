@@ -68,6 +68,10 @@ BOTTOM   XREAD BUFFER,80
 *
 ***< START PRINT SUBROUTINE>
 *
+         L     2,=F'1'
+         XDECO 2,DIV
+         L     3,=F'5'
+         XDECO 3,HOWMANY
          LA    1,PPARMS
          L     15,=V(PRINT)
          BALR  14,15
@@ -113,12 +117,15 @@ TABLE    DC    80F'-64'
 EOT      DS    F
 BUFFER   DS    80C
          DC    C'*'
+DIV      DS    F
+HOWMANY  DS    F
 PARMS    DC    A(TABLE)
          DC    A(EOT)
          DC    A(BUFFER)
 PPARMS   DC    A(TABLE)
          DC    A(EOT)
-         DC    A(BUFFER)
+         DC    A(DIV)
+         DC    A(HOWMANY)
 *
 ***< RESTORE REGISTERS >
 *
@@ -181,14 +188,35 @@ PRINT    CSECT
 *
 ***< START LOGIC>
 *
-         LM    2,5,0(1)
+         LM    2,5,0(1)         Load params
+LOOP4    CR    2,3              Compare table & EOT
+         BC    B'1010',ENDL4    If table empty end
+         L     7,0(0,2)         Load num into R7 for division
+         M     6,=F'1'          Clear out R6 for division
+         DR    6,3              Divide R7 by R3
+         C     6,=F'0'          See if remainder is 0
+         BC    B'1000',PRINTME  If remainder 0 print item
+         LA    2,4(0,2)         Increment counter
+         BC    B'0111',LOOP4    Otherwise loop again
+PRINTME  LR    8,0(0,2)
+         LA    2,4(0,2)         Increment counter
+         XDECO 8,PNUM
+ENDL4    XPRNT PLIST,13
 *
 ***< EXIT LINKAGE >
 *
          L     13,4(0,13)
          LM    14,12,12(13)
          BR    14
+*
+***< LTORG FOR PRINT>
+*
          LTORG
+PLIST    DC    C' '
+PNUM     DS    CL12
+*
+***< RESTORE REGISTERS>
+*
 PSAVE    DS    18F
          END   MAIN
 /*
