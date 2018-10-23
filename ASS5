@@ -78,9 +78,6 @@ BOTTOM   XREAD BUFFER,80
 *
 ***< PRINT D1-D3 & H1-H3 AND MULTIPLES>
 *
-         XPRNT SET1,17
-         XPRNT SET2,17
-         XPRNT SET3,17
 ***< EXIT LINKAGE>
 *
          L     13,4(0,13)
@@ -198,9 +195,9 @@ LOOP4    CR    2,3              Compare table & EOT
          BC    B'1000',PRINTME  If remainder 0 print item
          LA    2,4(0,2)         Increment counter
          BC    B'0111',LOOP4    Otherwise loop again
-PRINTME  LR    8,0(0,2)
+PRINTME  L     8,0(0,2)         Load num into R8
          LA    2,4(0,2)         Increment counter
-         XDECO 8,PNUM
+         XDECO 8,PNUM           Load R8 into PNUM
 ENDL4    XPRNT PLIST,13
 *
 ***< EXIT LINKAGE >
