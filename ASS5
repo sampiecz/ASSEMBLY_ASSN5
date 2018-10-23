@@ -1,0 +1,76 @@
+//KC03O8EA JOB ,'SAM PIECZ',MSGCLASS=H
+//STEP1 EXEC PGM=ASSIST
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+***************************************************
+* ASSIGNMENT FIVE
+*
+* NAME: SAMUEL PIECZ
+*
+* REGISTER USAGE
+*
+* 1
+* 2
+* 3
+* 4
+* 5
+* 6
+* 7
+* 8
+* 9
+* 10
+* 11
+* 12
+* 13
+* 14
+*
+***************************************************
+MAIN     CSECT
+         USING MAIN,15
+         LA    1,PARMS
+* START ABS SUBROUTINE
+         L     15,=V(BUILD)
+         BALR  14,15
+* END ABS SUBROUTINE
+         LTORG
+* START ACTUAL CODE DON'T KNOW WHAT ABOVE IS ITS
+* FROM THE EXAMPLE ON EXTERNAL SUBROUTINES
+MAINSAVE DS    18F
+TABLE    DC    80F'-64'
+EOT      DS    F
+BUFFER   DC    80C
+         DC    C'*'
+PARMS    DC    A(TABLE)
+         DC    A(EOT)
+         DC    A(BUFFER)
+         BR    14
+****************************************************
+* START BUILD SUBROUTINE - AN EXTERNAL SUBROUTINE
+****************************************************
+BUILD    CSECT
+         STM   14,12,12(13)
+         LR    12,15
+         USING BUILD,12
+         LA    14,BSAVE
+         ST    13,4(0,14)
+         ST    14,8(0,13)
+         LR    13,14
+         LM    2,3,0(1)
+* NOW CODE THAT ACTUALLY DOES STUFF
+         LM    2,4,0(1)
+LOOP     XREAD BUFFER,80
+         BL
+* NOW NOT CODE STUFF MORE LINKAGE CRAP
+         L     13,4(0,13)
+         LM    14,12,12(13)
+         BR    14
+         LTORG
+BSAVE    DS    18F
+****************************************************
+* START PRINT SUBROUTINE - AN EXTERNAL SUBROUTINE
+****************************************************
+         END   MAIN
+/*
+//FT05F001  DD  DSN=KC02314.AUTUMN18.CSCI360.HW5DATA,DISP=SHR
+//
