@@ -1,0 +1,388 @@
+1                    J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E  Z O S K C T R         
+0 
+ 23.43.54 JOB01574 ---- TUESDAY,   23 OCT 2018 ----
+ 23.43.54 JOB01574  IRR010I  USERID KC03O8E  IS ASSIGNED TO THIS JOB.
+ 23.43.54 JOB01574  ICH70001I KC03O8E  LAST ACCESS AT 23:43:39 ON TUESDAY, OCTOBER 23, 2018
+ 23.43.54 JOB01574  $HASP373 KC03O8EA STARTED - INIT 1    - CLASS A        - SYS S0W1
+ 23.43.54 JOB01574  -                                         --TIMINGS (MINS.)--            ----PAGING COUNTS---
+ 23.43.54 JOB01574  -JOBNAME  STEPNAME PROCSTEP    RC   EXCP    TCB    SRB  CLOCK   SERV  PG   PAGE   SWAP    VIO SWAPS
+ 23.43.54 JOB01574  -KC03O8EA                      00     84 ******    .00     .0    291   0      0      0      0     0
+ 23.43.54 JOB01574  -KC03O8EA ENDED.  NAME-SAM PIECZ            TOTAL TCB CPU TIME=   .00  TOTAL ELAPSED TIME=    .0
+ 23.43.54 JOB01574  $HASP395 KC03O8EA ENDED
+0------ JES2 JOB STATISTICS ------
+-  23 OCT 2018 JOB EXECUTION DATE
+-          295 CARDS READ
+-          388 SYSOUT PRINT RECORDS
+-            0 SYSOUT PUNCH RECORDS
+-           29 SYSOUT SPOOL KBYTES
+-         0.00 MINUTES EXECUTION TIME
+         1 //KC03O8EA JOB ,'SAM PIECZ',MSGCLASS=H                                  JOB01574
+         2 //STEP1 EXEC PGM=ASSIST                                                         
+         3 //STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                                
+         4 //SYSPRINT DD SYSOUT=*                                                          
+         5 //SYSIN DD *                                                                    
+         6 //FT05F001  DD  DSN=KC02314.AUTUMN18.CSCI360.HW5DATA,DISP=SHR                   
+ ICH70001I KC03O8E  LAST ACCESS AT 23:43:39 ON TUESDAY, OCTOBER 23, 2018
+ IEF236I ALLOC. FOR KC03O8EA STEP1
+ IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO SYSIN
+ IGD103I SMS ALLOCATED TO DDNAME FT05F001
+ IEF142I KC03O8EA STEP1 - STEP WAS EXECUTED - COND CODE 0000
+ IGD104I KC02293.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+ IEF285I   KC03O8E.KC03O8EA.JOB01574.D0000102.?         SYSOUT        
+ IEF285I   KC03O8E.KC03O8EA.JOB01574.D0000101.?         SYSIN         
+ IGD104I KC02314.AUTUMN18.CSCI360.HW5DATA             RETAINED,  DDNAME=FT05F001
+ IEF373I STEP/STEP1   /START 2018296.2343
+ IEF032I STEP/STEP1   /STOP  2018296.2343 
+         CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+         VIRT:   584K  SYS:   268K  EXT:        4K  SYS:    11432K
+         ATB- REAL:                     0K  SLOTS:                     0K
+              VIRT- ALLOC:       0M SHRD:       0M
+ IEF375I  JOB/KC03O8EA/START 2018296.2343
+ IEF033I  JOB/KC03O8EA/STOP  2018296.2343 
+         CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+1*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT         
+0                                                                                                                                 
+0                                                                                                               PAGE    1         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                       1 ***************************************************                                      
+                                       2 * ASSIGNMENT FIVE                                                                        
+                                       3 *                                                                                        
+                                       4 * NAME: SAMUEL PIECZ                                                                     
+                                       5 *                                                                                        
+                                       6 * CSECT: MAIN                                                                            
+                                       7 *                                                                                        
+                                       8 * REGISTER USAGE:                                                                        
+                                       9 * 1  Holds parameters that are passed into subroutines                                   
+                                      10 * 2  Holds num from BUFFER                                                               
+                                      11 * 3  Holds num from BUFFER                                                               
+                                      12 * 4  Holds num from BUFFER                                                               
+                                      13 * 5  Holds num from BUFFER                                                               
+                                      14 * 6  Holds num from BUFFER                                                               
+                                      15 * 7  Holds num from BUFFER                                                               
+                                      16 * 8  Holds BUFFER                                                                        
+                                      17 * 9  Unused                                                                              
+                                      18 * 10 Unused                                                                              
+                                      19 * 11 Unused                                                                              
+                                      20 * 12 Linkage register                                                                    
+                                      21 * 13 Linkage register                                                                    
+                                      22 * 14 Reserved for exiting subroutines                                                    
+                                      23 * 15 Reserved for subroutines                                                            
+                                      24 ***************************************************                                      
+ 000000                               25 MAIN     CSECT                                                                           
+                                      26 *                                                                                        
+                                      27 ***< ENTRY LINKAGE>                                                                      
+                                      28 *                                                                                        
+ 000000 90EC D00C            0000C    29          STM   14,12,12(13)                                                              
+ 000004 18CF                          30          LR    12,15                                                                     
+ 000000                               31          USING MAIN,12                                                                   
+ 000006 41E0 C320            00320    32          LA    14,MAINSAVE                                                               
+ 00000A 50E0 D008            00008    33          ST    14,8(0,13)                                                                
+ 00000E 50D0 E004            00004    34          ST    13,4(0,14)                                                                
+ 000012 18DE                          35          LR    13,14                                                                     
+                                      36 *                                                                                        
+                                      37 ***< CALL BUILD SUBROUTINE AND PASS IN PARMS>                                            
+                                      38 *                                                                                        
+ 000014 4110 C304            00304    39          LA    1,PARMS         Load params into R1                                       
+ 000018 58F0 C0F8            000F8    40          L     15,=V(BUILD)    Load R15 with subr                                        
+ 00001C 05EF                          41          BALR  14,15           Branch to subroutin                                       
+                                      42 *                                                                                        
+                                      43 ***< READ IN D1-D3 & H1-H3>                                                              
+                                      44 *                                                                                        
+ 00001E 5380 C2A8            002A8    45          XDECI 8,BUFFER        Put buffer in R8                                          
+ 000022 5980 C0FC            000FC    46          C     8,=F'-1010101'  Check if R8 is delim                                      
+ 000026 4780 C02A            0002A    47          BC    B'1000',BOTTOM  If it is, goto bottm                                      
+ 00002A E000 C2A8 0050 002A8          48 BOTTOM   XREAD BUFFER,80       Read buffer                                               
+ 000030 5320 C2A8            002A8    49          XDECI 2,BUFFER        Put num1 in R2                                            
+ 000034 5020 C14C            0014C    50          ST    2,D1            Put num1 divide by num1                                   
+ 000038 5331 0000            00000    51          XDECI 3,0(1)          Same thing for num2                                       
+ 00003C 5030 C158            00158    52          ST    3,H1            Same thing num2 aka howmany                               
+1                                                                                                               PAGE    2         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 000040 E000 C2A8 0050 002A8          53          XREAD BUFFER,80       Read in more data                                         
+ 000046 5340 C2A8            002A8    54          XDECI 4,BUFFER        same thing for second set                                 
+ 00004A 5040 C150            00150    55          ST    4,D2            same thing for second set                                 
+ 00004E 5351 0000            00000    56          XDECI 5,0(1)          same thing for second set                                 
+ 000052 5050 C15C            0015C    57          ST    5,H2            same thing for second set                                 
+ 000056 E000 C2A8 0050 002A8          58          XREAD BUFFER,80       Read in more data                                         
+ 00005C 5360 C2A8            002A8    59          XDECI 6,BUFFER        same thing for third set                                  
+ 000060 5060 C154            00154    60          ST    6,D3            same thing for third set                                  
+ 000064 5371 0000            00000    61          XDECI 7,0(1)          same thing for third set                                  
+ 000068 5070 C160            00160    62          ST    7,H3            same thing for third set                                  
+ 00006C E020 C13B 000F 0013B          63          XPRNT TOC,15          Print table of contents                                   
+                                      64 *                                                                                        
+                                      65 ***< START PRINT SUBROUTINE>                                                             
+                                      66 *                                                                                        
+ 000072 5820 C100            00100    67          L     2,=F'1'         Load 1 into R2                                            
+ 000076 5020 C2FC            002FC    68          ST    2,DIV           Put 2 in DIV fullword                                     
+ 00007A 5830 C104            00104    69          L     3,=F'5'         Load 5 into R3                                            
+ 00007E 5030 C300            00300    70          ST    3,HOWMANY       Put R3 in HOWMANY                                         
+ 000082 4110 C310            00310    71          LA    1,PPARMS        Load parameters in R1                                     
+ 000086 58F0 C108            00108    72          L     15,=V(PRINT)    Put Print subroutine in R15                               
+ 00008A 05EF                          73          BALR  14,15           Branch to print subroutine                                
+                                      74 *                                                                                        
+                                      75 ***< PRINT D1-D3 & H1-H3 AND MULTIPLES>                                                  
+                                      76 *                                                                                        
+ 00008C E020 C10C 000F 0010C          77          XPRNT SET1,15         Print multiple                                            
+ 000092 5820 C14C            0014C    78          L     2,D1            Load D1 into R2                                           
+ 000096 5830 C158            00158    79          L     3,H1            Load H1 into R3                                           
+ 00009A 5020 C2FC            002FC    80          ST    2,DIV           Put R2 in DIV                                             
+ 00009E 5030 C300            00300    81          ST    3,HOWMANY       Put R3 in HOWMANY                                         
+ 0000A2 4110 C310            00310    82          LA    1,PPARMS        Load above vals in parms                                  
+ 0000A6 58F0 C108            00108    83          L     15,=V(PRINT)    Load subroutine into R15                                  
+ 0000AA 05EF                          84          BALR  14,15           Branch to print routine                                   
+ 0000AC E020 C11B 0010 0011B          85          XPRNT SET2,16         Redo above operations                                     
+ 0000B2 5820 C150            00150    86          L     2,D2            with the new values                                       
+ 0000B6 5830 C15C            0015C    87          L     3,H2            same as above                                             
+ 0000BA 5020 C2FC            002FC    88          ST    2,DIV           same as above                                             
+ 0000BE 5030 C300            00300    89          ST    3,HOWMANY       same as above                                             
+ 0000C2 4110 C310            00310    90          LA    1,PPARMS        same as above                                             
+ 0000C6 58F0 C108            00108    91          L     15,=V(PRINT)    same as above                                             
+ 0000CA 05EF                          92          BALR  14,15           same as above                                             
+ 0000CC E020 C12B 0010 0012B          93          XPRNT SET3,16         same as above                                             
+ 0000D2 5820 C154            00154    94          L     2,D3            same as above                                             
+ 0000D6 5830 C160            00160    95          L     3,H3            same as above                                             
+ 0000DA 5020 C2FC            002FC    96          ST    2,DIV           same as above                                             
+ 0000DE 5030 C300            00300    97          ST    3,HOWMANY       same as above                                             
+ 0000E2 4110 C310            00310    98          LA    1,PPARMS        same as above                                             
+ 0000E6 58F0 C108            00108    99          L     15,=V(PRINT)    same as above                                             
+ 0000EA 05EF                         100          BALR  14,15           same as above                                             
+                                     101 *                                                                                        
+                                     102 ***< EXIT LINKAGE>                                                                       
+                                     103 *                                                                                        
+ 0000EC 58D0 D004            00004   104          L     13,4(0,13)                                                                
+ 0000F0 98EC D00C            0000C   105          LM    14,12,12(13)                                                              
+ 0000F4 07FE                         106          BR    14                                                                        
+                                     107 *                                                                                        
+                                     108 ***< MAIN LTORGS>                                                                        
+                                     109 *                                                                                        
+1                                                                                                               PAGE    3         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                     110          LTORG                                                                           
+ 0000F8 00000368                     111                =V(BUILD)                                                                 
+ 0000FC FFF0964B                     112                =F'-1010101'                                                              
+ 000100 00000001                     113                =F'1'                                                                     
+ 000104 00000005                     114                =F'5'                                                                     
+ 000108 00000408                     115                =V(PRINT)                                                                 
+                                     116 *                                                                                        
+                                     117 ***< FOR MULTIPLES>                                                                      
+                                     118 *                                                                                        
+ 00010C 40                           119 SET1     DC    C' '                  Declare set 1 for printing                          
+ 00010D D4A493A389979385             120          DC    CL14'Multiples of 9'  Banner text                                         
+ 00011B 40                           121 SET2     DC    C' '                  Declare set 2 for printing                          
+ 00011C D4A493A389979385             122          DC    CL15'Multiples of 10' Banner text                                         
+ 00012B 40                           123 SET3     DC    C' '                  Declare set 3 for printing                          
+ 00012C D4A493A389979385             124          DC    CL15'Multiples of 13' Banner text                                         
+                                     125 *                                                                                        
+                                     126 ***< FOR TABLE OF Contents>                                                              
+                                     127 *                                                                                        
+ 00013B 40                           128 TOC      DC    C' '                 Table of contents                                    
+ 00013C E38182938540C396             129          DC    CL14'Table Contents' banner text                                          
+ 00014C                              130 D1       DS    F                    Fullwords for howmany and divide                     
+ 000150                              131 D2       DS    F                    Fullwords for howmany and divide                     
+ 000154                              132 D3       DS    F                    Fullwords for howmany and divide                     
+ 000158                              133 H1       DS    F                    Fullwords for howmany and divide                     
+ 00015C                              134 H2       DS    F                    Fullwords for howmany and divide                     
+ 000160                              135 H3       DS    F                    Fullwords for howmany and divide                     
+                                     136 *                                                                                        
+                                     137 ***< PARAMETER LISTS ONE FOR BUILD ONE FOR PRINT>                                        
+                                     138 *                                                                                        
+ 000164 FFFFFFC0FFFFFFC0             139 TABLE    DC    80F'-64'             Declare table for storing nums                       
+ 0002A4                              140 EOT      DS    F                    End of table                                         
+ 0002A8                              141 BUFFER   DS    80C                  Setup buffer                                         
+ 0002F8 5C                           142          DC    C'*'                 Add delimeter to the end of bufer                    
+ 0002FC                              143 DIV      DS    F                    Divide by fullword                                   
+ 000300                              144 HOWMANY  DS    F                    Howmany to print fullword                            
+ 000304 00000164                     145 PARMS    DC    A(TABLE)             Load params for BUILD subroutine                     
+ 000308 000002A4                     146          DC    A(EOT)               Load address of end of table                         
+ 00030C 000002A8                     147          DC    A(BUFFER)            Load address of buffer                               
+ 000310 00000164                     148 PPARMS   DC    A(TABLE)             New params for PRINT subroutine                      
+ 000314 000002A4                     149          DC    A(EOT)               Address for EOT                                      
+ 000318 000002FC                     150          DC    A(DIV)               Address for divide by this num                       
+ 00031C 00000300                     151          DC    A(HOWMANY)           Address for howmany to print                         
+                                     152 *                                                                                        
+                                     153 ***< RESTORE REGISTERS >                                                                 
+                                     154 *                                                                                        
+ 000320                              155 MAINSAVE DS    18F                                                                       
+                                     156 ***************************************************                                      
+                                     157 *                                                                                        
+                                     158 * CSECT: BUILD                                                                           
+                                     159 *                                                                                        
+                                     160 * CSECT: MAIN                                                                            
+                                     161 *                                                                                        
+                                     162 * REGISTER USAGE:                                                                        
+                                     163 * 1  Parameters are passed into this register, also used for holding R4                  
+                                     164 * 2  Holds passed in parameters - Table address                                          
+                                     165 * 3  Holds passed in parameters - End of table address                                   
+                                     166 * 4  Holds passed in parameters - Buffer address                                         
+1                                                                                                               PAGE    4         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                     167 * 5  Unused                                                                              
+                                     168 * 6  Used to hold current num during iteration & comparison                              
+                                     169 * 7  Unused                                                                              
+                                     170 * 8  Unused                                                                              
+                                     171 * 9  Unused                                                                              
+                                     172 * 10 Unused                                                                              
+                                     173 * 11 Unused                                                                              
+                                     174 * 12 Linkage register                                                                    
+                                     175 * 13 Linkage register                                                                    
+                                     176 * 14 Reserved for exiting subroutines                                                    
+                                     177 * 15 Reserved for subroutines                                                            
+                                     178 ***************************************************                                      
+ 000368                              179 BUILD    CSECT                                                                           
+                                     180 *                                                                                        
+                                     181 ***< ENTRY LINKAGE>                                                                      
+                                     182 *                                                                                        
+ 000368 90EC D00C            0000C   183          STM   14,12,12(13)                                                              
+ 00036C 18CF                         184          LR    12,15                                                                     
+ 000368                              185          USING BUILD,12                                                                  
+ 00036E 41E0 C054            003BC   186          LA    14,BSAVE                                                                  
+ 000372 50D0 E004            00004   187          ST    13,4(0,14)                                                                
+ 000376 50E0 D008            00008   188          ST    14,8(0,13)                                                                
+ 00037A 18DE                         189          LR    13,14                                                                     
+                                     190 *                                                                                        
+                                     191 ***< START LOGIC>                                                                        
+                                     192 *                                                                                        
+ 00037C 9824 1000            00000   193          LM    2,4,0(1)            Load R2-R4 with params                                
+ 000380 E004 0000 0050 00000         194 LOOP1    XREAD 0(4),80             BEGIN READ                                            
+ 000386 4740 C042            003AA   195          BC    B'0100',ENDL1       Branch on less than                                   
+ 00038A 4114 0000            00000   196          LA    1,0(4)              Load R1 with R4                                       
+ 00038E 5361 0000            00000   197 LOOP2    XDECI 6,0(1)              Put R1 into R6                                        
+ 000392 4710 C018            00380   198          BC    B'0001',LOOP1       Branch if delim                                       
+ 000396 5960 C050            003B8   199          C     6,=F'-1010101'      Compare num with delim                                
+ 00039A 4780 C042            003AA   200          BC    B'1000',ENDL1       Branch if equal to delim                              
+ 00039E 5062 0000            00000   201          ST    6,0(2)              Store num in table                                    
+ 0003A2 4120 2004            00004   202          LA    2,4(0,2)            Increment pointer                                     
+ 0003A6 47F0 C026            0038E   203          BC    B'1111',LOOP2       Unconditional goto LOOP2                              
+ 0003AA 5020 3000            00000   204 ENDL1    ST    2,0(0,3)            Store R2 into R3                                      
+                                     205 *                                                                                        
+                                     206 ***< EXIT LINKAGE >                                                                      
+                                     207 *                                                                                        
+ 0003AE 58D0 D004            00004   208          L     13,4(0,13)                                                                
+ 0003B2 98EC D00C            0000C   209          LM    14,12,12(13)                                                              
+ 0003B6 07FE                         210          BR    14                                                                        
+                                     211          LTORG                                                                           
+ 0003B8 FFF0964B                     212                =F'-1010101'                                                              
+ 0003BC                              213 BSAVE    DS    18F                                                                       
+                                     214 ***************************************************                                      
+                                     215 *                                                                                        
+                                     216 * CSECT: PRINT                                                                           
+                                     217 *                                                                                        
+                                     218 * REGISTER USAGE:                                                                        
+                                     219 * 1  Parameters are passed into this register, also used for holding R4                  
+                                     220 * 2  Holds passed in parameters - Table address                                          
+                                     221 * 3  Holds passed in parameters - End of table address                                   
+                                     222 * 4  Holds passed in parameters - Number to divide by                                    
+                                     223 * 5  Holds passed in parameters - How many items to print                                
+1                                                                                                               PAGE    5         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                     224 * 6  Division - first half of num                                                        
+                                     225 * 7  Division - second half of num                                                       
+                                     226 * 8  Intermediary register to put num in pnum in pline                                   
+                                     227 * 9  Holds -64 for comparison                                                            
+                                     228 * 10 Holds pointer to beginning of PLINE                                                 
+                                     229 * 11 Used as a counter                                                                   
+                                     230 * 12 Linkage register                                                                    
+                                     231 * 13 Linkage register                                                                    
+                                     232 * 14 Reserved for exiting subroutines                                                    
+                                     233 * 15 Reserved for subroutines                                                            
+                                     234 ***************************************************                                      
+ 000408                              235 PRINT    CSECT                                                                           
+                                     236 *                                                                                        
+                                     237 ***< ENTRY LINKAGE>                                                                      
+                                     238 *                                                                                        
+ 000408 90EC D00C            0000C   239          STM   14,12,12(13)                                                              
+ 00040C 18CF                         240          LR    12,15                                                                     
+ 000408                              241          USING PRINT,12                                                                  
+ 00040E 41E0 C114            0051C   242          LA    14,PSAVE                                                                  
+ 000412 50D0 E004            00004   243          ST    13,4(0,14)                                                                
+ 000416 50E0 D008            00008   244          ST    14,8(0,13)                                                                
+ 00041A 18DE                         245          LR    13,14                                                                     
+                                     246 *                                                                                        
+                                     247 ***< START LOGIC>                                                                        
+                                     248 *                                                                                        
+ 00041C 9825 1000            00000   249          LM    2,5,0(1)            Load params                                           
+ 000420 1BBB                         250          SR    11,11               Clear counter                                         
+ 000422 41A0 C0A5            004AD   251 LOOP4    LA    10,PLINE+1          Load start of PLINE                                   
+ 000426 9240 C0A5      004AD         252          MVI   PLINE+1,C' '        Put first space in PLINE                              
+ 00042A D25E C0A6 C0A5 004AE 004AD   253          MVC   PLINE+2(95),PLINE+1 Copy first space destructively                        
+ 000430 58B0 C098            004A0   254          L     11,=F'0'            Load zero into R11                                    
+ 000434 59B5 0000            00000   255 LOOP5    C     11,0(5)             Compare counter and howmany                           
+ 000438 4780 C078            00480   256          BC    B'1000',PRINTME1    If table empty end                                    
+ 00043C 1923                         257          CR    2,3                 Compare table and eot                                 
+ 00043E 4780 C082            0048A   258          BC    B'1000',PRINTME2    If EOT make it stop                                   
+ 000442 5890 C09C            004A4   259          L     9,=F'-64'           Load -64 into R9                                      
+ 000446 5990 2000            00000   260          C     9,0(0,2)            Compare table value, and R9                           
+ 00044A 4780 C082            0048A   261          BC    B'1000',PRINTME2    If value is -64 skip to end                           
+ 00044E 5870 2000            00000   262          L     7,0(0,2)            Load num into R7 for division                         
+ 000452 5C60 C0A0            004A8   263          M     6,=F'1'             Clear out R6 for division                             
+ 000456 5D64 0000            00000   264          D     6,0(4)              Divide R7 by R3                                       
+ 00045A 5960 C098            004A0   265          C     6,=F'0'             See if remainder is 0                                 
+ 00045E 4770 C070            00478   266          BC    B'0111',NOPE        If not equal don't print                              
+ 000462 5880 2000            00000   267          L     8,0(0,2)            Load number into R8                                   
+ 000466 5280 C105            0050D   268          XDECO 8,PNUM              Put R8 aka num, in PNUM                               
+ 00046A D20B A000 C105 00000 0050D   269          MVC   0(12,10),PNUM       Put num into PLINE                                    
+ 000470 41A0 A00C            0000C   270          LA    10,12(0,10)         Increment pointer to PLINE                            
+ 000474 5AB0 C0A0            004A8   271          A     11,=F'1'            Increment counter                                     
+ 000478 4120 2004            00004   272 NOPE     LA    2,4(0,2)            Increment table ptr                                   
+ 00047C 47F0 C02C            00434   273          B     LOOP5               Unconditional branch to LOOP5                         
+ 000480 E020 C0A4 0061 004AC         274 PRINTME1 XPRNT PLINE,97            Print the line                                        
+ 000486 47F0 C01A            00422   275          B     LOOP4               and loop again                                        
+ 00048A E020 C0A4 0061 004AC         276 PRINTME2 XPRNT PLINE,97            Last line, just print it no loop                      
+                                     277 *                                                                                        
+                                     278 ***< EXIT LINKAGE >                                                                      
+                                     279 *                                                                                        
+ 000490 58D0 D004            00004   280          L     13,4(0,13)                                                                
+1                                                                                                               PAGE    6         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 000494 98EC D00C            0000C   281          LM    14,12,12(13)                                                              
+ 000498 07FE                         282          BR    14                                                                        
+                                     283 *                                                                                        
+                                     284 ***< LTORG FOR PRINT>                                                                    
+                                     285 *                                                                                        
+                                     286          LTORG                                                                           
+ 0004A0 00000000                     287                =F'0'                                                                     
+ 0004A4 FFFFFFC0                     288                =F'-64'                                                                   
+ 0004A8 00000001                     289                =F'1'                                                                     
+ 0004AC 40                           290 PLINE    DC    C' '                Line for printing                                     
+ 0004AD 4040404040404040             291          DC    CL96' '             96 spaces long                                        
+ 00050D                              292 PNUM     DS    CL12' '             pnum is where value goes                              
+                                     293 *                                                                                        
+                                     294 ***< RESTORE REGISTERS>                                                                  
+                                     295 *                                                                                        
+ 00051C                              296 PSAVE    DS    18F                                                                       
+                                     297          END   MAIN                                                                      
+0***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                      
+0*** DYNAMIC CORE AREA USED:  LOW:   13308 HIGH:    1204 LEAVING:  479056 FREE BYTES. AVERAGE:       48 BYTES/STMT ***            
+0*** ASSEMBLY TIME =    0.001 SECS,   298000 STATEMENTS/SEC ***                                                                   
+0*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                       
+ Table Contents                                                                                                                   
+       -26924         290          97        3290         351                                                                     
+           74        -350        -724        -104         -37                                                                     
+           53       -8909        6300          46          13                                                                     
+          591          10          26       -1869       -6299                                                                     
+            3         333      -15141         868         662                                                                     
+          859        -529          35        -288       -8942                                                                     
+        27446       -6729         600        3548         -84                                                                     
+         -840      -13931       32439       -5537          82                                                                     
+          837          58       39770       22386       20537                                                                     
+         7595       -4350        -374          21         -68                                                                     
+         4734          78        -788       -3728       22483                                                                     
+          310         514       18935       -5249         798                                                                     
+        11008       14989         495          23        9503                                                                     
+           65          76           4           6      -18467                                                                     
+         -169         -58        5705      -16827        2995                                                                     
+         5436         902         382         718                                                                                 
+ Multiples of 9                                                                                                                   
+          351        6300         333        -288         837        4734                                                         
+          495        5436                                                                                                         
+ Multiples of 10                                                                                                                  
+          290        3290        -350        6300          10         600        -840       39770                                 
+        -4350         310                                                                                                         
+ Multiples of 13                                                                                                                  
+          351        -104          13          26                                                                                 
+        22386          78       14989        9503                                                                                 
+           65        -169                                                                                                         
+0*** EXECUTION TIME =    0.004 SECS.      5966 INSTRUCTIONS EXECUTED -  1491500 INSTRUCTIONS/SEC ***                              
+0*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                
